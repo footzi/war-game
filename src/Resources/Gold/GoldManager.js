@@ -1,6 +1,6 @@
-import { INITIAL_RESOURCES } from '../constants.js';
-import { getRandomCoords } from '../utils/getRandomCoords.js';
-import { GoldUI } from '../UI/Gold.js';
+import { INITIAL_RESOURCES } from '../../constants.js';
+import { getRandomCoords } from '../../utils/getRandomCoords.js';
+import { GoldUI } from '../../UI/Gold.js';
 
 export class GoldManager {
   constructor({ map, store }) {

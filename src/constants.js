@@ -17,6 +17,7 @@ export const TEXT_STYLES = {
   fill: '#ffffff',
 };
 
+// @todo move as PersonTYPE
 export const RESOURCES = ['food', 'forest', 'gold', 'metal'];
 export const RESOURCES_LIST = {
   FOREST: {
@@ -34,8 +35,15 @@ export const RESOURCES_LIST = {
   },
 };
 
+export const DEFAULT_RESOURCES = {
+  gold: 100,
+  forest: 500,
+  food: 300,
+  metal: 10,
+};
+
 export const BUILDINGS_LIST = {
-  HOME: {
+  HOUSE: {
     name: 'Ратуша',
     width: 70,
     height: 40,
@@ -45,7 +53,7 @@ export const BUILDINGS_LIST = {
     },
   },
 };
-export const BUILDINGS = [BUILDINGS_LIST.HOME, BUILDINGS_LIST.HOME, BUILDINGS_LIST.HOME, BUILDINGS_LIST.HOME];
+export const BUILDINGS = [BUILDINGS_LIST.HOUSE, BUILDINGS_LIST.HOUSE, BUILDINGS_LIST.HOUSE, BUILDINGS_LIST.HOUSE];
 
 export const INITIAL_RESOURCES = {
   forest: [
@@ -55,4 +63,23 @@ export const INITIAL_RESOURCES = {
     [4, 4, 4, 4],
   ],
   gold: [500, 1000, 50],
+  builder: 4,
+};
+
+export const PERSONS_TYPE = {
+  BUILDER: 'BUILDER',
+};
+
+export const PERSONS_LIST = {
+  [PERSONS_TYPE.BUILDER]: {
+    type: PERSONS_TYPE.BUILDER,
+    label: 'Крестьянин',
+    width: 8,
+    height: 8,
+    color: '#598dfa',
+    cost: {
+      gold: 10,
+      food: 20,
+    },
+  },
 };

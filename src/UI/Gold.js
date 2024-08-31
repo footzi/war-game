@@ -1,8 +1,8 @@
 import { Container, Graphics } from 'pixi.js';
 import { RESOURCES_LIST } from '../constants.js';
-import { BaseElement } from './BaseElement.js';
+import { GameObject } from '../common/GameObject.js';
 
-export class GoldUI extends BaseElement {
+export class GoldUI extends GameObject {
   static COLOR = RESOURCES_LIST.GOLD.color;
   static ITEM_WIDTH = RESOURCES_LIST.GOLD.width;
   static ITEM_HEIGHT = RESOURCES_LIST.GOLD.height;

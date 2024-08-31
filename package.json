@@ -9,10 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "vite": "^5.2.0"
+    "prettier": "^3.3.3",
+    "vite": "^5.4.2"
   },
   "dependencies": {
-    "pixi.js": "^8.1.6"
+    "gsap": "^3.12.5",
+    "pixi.js": "^8.3.4"
   }
 }

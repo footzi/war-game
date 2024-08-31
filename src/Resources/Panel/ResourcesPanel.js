@@ -1,10 +1,12 @@
 import { Graphics, Container, Text, TextStyle } from 'pixi.js';
-import { RESOURCES, TEXT_STYLES } from '../constants';
+import { RESOURCES, TEXT_STYLES } from '../../constants.js';
 
-export class ResourcesUIPanel {
-  constructor({ app, store }) {
-    this.store = store;
+export class ResourcesGameObjectPanel {
+  constructor({ resources }) {
+    this.resources = resources;
+  }
 
+  paint() {
     this.container = new Container();
     this.container.label = 'ResourcesUIPanel';
 
@@ -22,12 +24,13 @@ export class ResourcesUIPanel {
 
     this.container.addChild(wrapper);
     this.texts = this.paintTexts() ?? [];
-    app.stage.addChild(this.container);
+
+    return this.container;
   }
 
   paintTexts() {
     const texts = [];
-    const resources = this.store.getResources();
+    const resources = this.resources.getResources();
 
     RESOURCES.forEach((item, index) => {
       const text = new Text({
@@ -45,7 +48,7 @@ export class ResourcesUIPanel {
   }
 
   update() {
-    const resources = this.store.getResources();
+    const resources = this.resources.getResources();
 
     this.texts.forEach(({ node, item }) => {
       node.text = `${item} ${resources[item]}`;
