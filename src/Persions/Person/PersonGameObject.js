@@ -1,17 +1,19 @@
-import { PERSONS_LIST } from '../constants.js';
-import { GameObject } from '../common/GameObject.js';
+import { PERSONS_LIST } from '../../constants.js';
+import { GameObject } from '../../common/GameObject.js';
 import { Container, Graphics } from 'pixi.js';
 import { gsap } from 'gsap';
-import { EVENTS } from '../Store/constants.js';
+import { Emmiter } from '../../utils/Emmiter/index.js';
 
-class PersonIU extends GameObject {
-  constructor({ x, y, width, height, color, type, store }) {
+export class PersonGameObject extends GameObject {
+  constructor({ x, y, width, height, color, type }) {
     super({ x, y, width, height });
     this.color = color;
     this.type = type;
-    this.store = store;
 
+    this.emmiter = new Emmiter();
     this.container = null;
+
+    this.isMoving = false;
   }
 
   paint() {
@@ -23,8 +25,9 @@ class PersonIU extends GameObject {
     this.container.eventMode = 'static';
     this.container.cursor = 'pointer';
 
-    this.container.on('pointerdown', () => {
-      this.store.emit(EVENTS.onPersonClick, this);
+    this.container.on('pointerdown', (event) => {
+      event.stopPropagation();
+      this.emmiter.emit('onClick', this);
     });
 
     const graphic = new Graphics().rect(0, 0, this.width, this.height).fill(this.color);
@@ -34,6 +37,8 @@ class PersonIU extends GameObject {
   }
 
   move({ x, y }) {
+    this.isMoving = true;
+
     const speed = 100;
     const gap = 5;
 
@@ -49,31 +54,18 @@ class PersonIU extends GameObject {
     const distance = Math.sqrt(dx * dx + dy * dy);
 
     const duration = distance / speed;
-    gsap.to(this.container, { duration, x, y, ease: 'none' });
-  }
-}
-
-export class BuilderUI extends PersonIU {
-  static COLOR = PERSONS_LIST.BUILDER.color;
-  static WIDTH = PERSONS_LIST.BUILDER.width;
-  static HEIGHT = PERSONS_LIST.BUILDER.height;
-  static TYPE = PERSONS_LIST.BUILDER.type;
-
-  constructor({ x, y, store }) {
-    super({
+    gsap.to(this.container, {
+      duration,
       x,
       y,
-      width: BuilderUI.WIDTH,
-      height: BuilderUI.HEIGHT,
-      color: BuilderUI.COLOR,
-      type: BuilderUI.TYPE,
-      store,
+      ease: 'none',
+      onComplete: () => {
+        this.isMoving = false;
+      },
     });
   }
 
-  // move(coords) {
-  //   if (this.isSelected) {
-  //     console.log(coords);
-  //   }
-  // }
+  onClick(callback) {
+    this.emmiter.on('onClick', callback);
+  }
 }

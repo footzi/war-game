@@ -1,12 +1,19 @@
 import { BuildingPanelGameObject } from './Panel/BuildingPanel.js';
 import { HouseGameObject } from './House/HouseGameObject.js';
+import { Emmiter } from '../utils/Emmiter/index.js';
 
 export class BuildingsGameObjects {
   constructor({ app, map }) {
     this.app = app;
     this.map = map;
 
+    this.emmiter = new Emmiter();
+
     this.buildingPanel = new BuildingPanelGameObject();
+
+    this.buildingPanel.onPanelClick((building) => {
+      this.emmiter.emit('onPanelClick', building);
+    });
 
     app.stage.addChild(this.buildingPanel.paint());
   }
@@ -18,7 +25,7 @@ export class BuildingsGameObjects {
   }
 
   onPanelClick(callback) {
-    this.buildingPanel.onPanelClick(callback);
+    this.emmiter.on('onPanelClick', callback);
   }
 
   onFinishBuilding() {

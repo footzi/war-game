@@ -8,6 +8,9 @@ export class Map {
     this.gameObjects = {
       buildings: [],
       resources: [],
+      persons: {
+        builders: [],
+      },
     };
 
     app.stage.addChild(this.mapGameObject);
@@ -21,6 +24,11 @@ export class Map {
   addBuildingGameObject(gameObject) {
     this.mapGameObject.addChild(gameObject);
     this.gameObjects.buildings.push(gameObject);
+  }
+
+  addBuilderGameObject(gameObject) {
+    this.mapGameObject.addChild(gameObject);
+    this.gameObjects.persons.builders.push(gameObject);
   }
 
   getResourceGameObjects() {

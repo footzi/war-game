@@ -3,18 +3,11 @@ import { gsap } from 'gsap';
 import { PixiPlugin } from 'gsap/PixiPlugin';
 import './index.css';
 
-// import { Store } from './Store/index.js';
-// import { ResourcesUIPanel } from './UI/ResourcesPanel';
 import { CANVAS } from './constants';
-// import { BuildingUIPanel } from './UI/BuildingPanel';
-// import { BuildingManager } from './Buildings/BuildingManager';
 import { Map } from './Map/Map.js';
-// import { ForestManager } from './Resources/ForestManager.js';
-// import { GoldManager } from './Resources/Forest/GoldManager.js';
-// import { BuilderManager } from './Persions/BuilderManager.js';
-import { ResourcesManager } from './Resources/ResourseManager.js';
 import { Resources } from './Resources/Resources.js';
 import { Buildings } from './Buildings/Buildings.js';
+import { Persons } from './Persions/Persons.js';
 
 gsap.registerPlugin(PixiPlugin);
 
@@ -28,24 +21,7 @@ class Game {
 
     this.resources = new Resources({ app: this.app, map: this.map });
     this.buildings = new Buildings({ app: this.app, map: this.map, resources: this.resources });
-
-    // this.buildingManager = new BuildingManager({
-    //   app: this.app,
-    //   store: this.store,
-    //   map: this.map,
-    // });
-    //
-    // this.buildingUIPanel = new BuildingUIPanel({
-    //   app: this.app,
-    //   store: this.store,
-    //   map: this.map,
-    // });
-
-    // this.resourceUIPanel = new ResourcesUIPanel({ app: this.app,  });
-
-    // new ForestManager({ map: this.map, store: this.store });
-    // new GoldManager({ map: this.map, store: this.store });
-    // new BuilderManager({ map: this.map, store: this.store });
+    this.persons = new Persons({ app: this.app, map: this.map, resources: this.resources });
 
     this.update();
   }
